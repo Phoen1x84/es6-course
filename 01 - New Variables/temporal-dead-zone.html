@@ -7,6 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>        
+        /* 
+            good interview questions,
+            Can you explain what the temporal dead zone is
+            and could you give a simple example?
+        */
+        /*
+            if the console log is move above the pizza var
+            console will log undefined because it has access
+            to the var due to hoisting but not the value
+        */
+        console.log(pizza);     
+        var pizza = 'deep dish';
+
+        /* 
+            anotherPizza const will render not defined
+            because the const does not get hoisted up like
+            var would this is called the temporal dead zone
+        */
+        console.log(anotherPizza);
+        const anotherPizza = 'thin crust';
+
+    </script>
 </body>
 </html>

@@ -7,6 +7,49 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        /* 
+            a var inside a function is scoped only to that
+            function. If a var is used outside of a function
+            it is scoped globally and can be accessed, updated
+            or re-written to which can cause problems
+        */
+        function setWidth() {
+            var width = 100;
+            console.log(width);
+        }
+        setWidth(); // will log 100 to console
+        console.log(width); // width is not defined  
+
+        var age = 100;
+
+        if (age > 12) {
+            var dogYears = age * 7;
+            console.log(`you are ${dogYears} dog years old!`);
+        }
+        /*
+            will render 700 because the var variables are function 
+            scoped and leaked into the global namespace
+        */
+        console.log(dogYears);
+        
+        if (age > 12) {
+            let dogYearsLet = age * 7;
+            console.log(`you are ${dogYears} dog years old!`);
+        }
+        /*
+            dogYearsLet is not defined because 
+            let is locked / scoped only to the block { .... }
+        */
+        console.log(dogYearsLet); 
+        // simple block scope 
+        {
+            // i am a block
+        }
+
+        let height = 200;
+        const key = 'abc';
+
+    </script>
 </body>
 </html>

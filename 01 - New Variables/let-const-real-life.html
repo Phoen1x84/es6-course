@@ -7,6 +7,41 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+<script>
+    // self invoking function
+    (function() {
+        /*
+            name is scoped to the function only 
+            and not available in the global name space
+        */
+        var name = 'matt'; 
+        console.log(name);
+    })();
+
+    // block with const that is only scoped to the block
+    {
+        const name = 'matt 2';
+        console.log(name);
+    }
+
+    // for loop with global scope
+    for (var i = 0; i < 10; i++) {
+        // the var i is leaked into the global namespace
+        console.log(`es5 log ${i}`);
+        setTimeout(function() {
+            console.log(`es5 - the number is ${i}`);
+        }, 1000);
+    }
+    // es6 with let instead of var scopes the i to the for block only
+    for (let i = 0; i < 10; i++) {
+        // the let i is only scoped to this for loop
+        console.log(`es6 log ${i}`);
+        setTimeout(function() {
+            console.log(`es6 - the number is ${i}`);
+        }, 1000);
+    }
+
+</script>    
 </body>
 </html>
