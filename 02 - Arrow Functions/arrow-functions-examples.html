@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <script>
+        const race = '100m dash';
+        const winners = ['sniffles', 'badger', 'lucifer'];
+
+        /*
+            example of implicit returns using an object
+        */
+        const win = winners.map((winner, i) => ({
+            name: winner,
+            race,
+            place: i
+        })
+        );
+        console.table(win);
+        /* top tip console.table(win) */
+
+        const ages = [23, 35, 18, 65, 10, 15, 70, 85, 60];
+        const old = ages.filter(age => age >= 60);
+        console.table(old);
+
+    </script>
 </body>
+
 </html>
