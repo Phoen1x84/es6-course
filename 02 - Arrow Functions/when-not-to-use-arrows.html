@@ -1,12 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>When not to use arrow functions</title>
+    <style>
+        button {
+            font-size: 100px;
+        }
+
+        .on {
+            background: #ffc600;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <button id="pushy">Push me</button>
+    <script>
+        // when you really need 'this'
+        const button = document.querySelector('#pushy');
+        /* 
+            using an arrow function on a click event will use
+            the parent scope, a regular function is best used here
+        */
+        button.addEventListener('click', function () {
+            this.classList.toggle('on');
+        });
+
+        // when you need a method to bind to an object
+        const person = {
+            points: 23,
+            /* 
+                arrow function here will not increment the points value 
+                using a regular function will allow the points to increase
+            */
+            score: function () {
+                console.log(this);
+                this.points++;
+            }
+
+            /* 
+                or 
+                score() {
+                    console.log(this);
+                    this.points++;
+                }
+            */
+        };
+
+        // when you need to add a prototype method
+        class Car {
+            constructor(make, colour) {
+                this.make = make;
+                this.colour = colour;
+            }
+        };
+
+        const beemer = new Car('bmw', 'black');
+        const subie = new Car('subaru', 'blue');
+
+        Car.prototype.summarise = () => {
+            /* 
+                using an arrow function here will result in undefined
+                properties because it has not context of this.
+                Using a regular function() will have the values of make and colour
+
+            */
+            return `This car is a ${this.make} in the colour ${this.colour}`;
+        };
+        console.log(beemer.summarise());
+        console.log(subie.summarise());
+        // will result in This car is a undefined in the colour undefined
+
+        Car.prototype.summariseAgain = function () {
+            return `This car is a ${this.make} in the colour ${this.colour}`;
+        };
+        console.log(beemer.summariseAgain());
+        // will result in This car is a bmw in the colour black
+        console.log(subie.summariseAgain());
+        // will result in This car is a subaru in the colour blue
+
+        const orderMoreChildren = function () {
+            const children = Array.from(arguments);
+            return children.map((child, i) => {
+                return `${child} was child #${i + 1}`;
+            });
+            console.log(arguments)
+        };
+        console.log(orderMoreChildren('matt', 'vicky', 'mike'));
+
+        // when you need arguments objects
+        const orderChildren = () => {
+            /* 
+                arrow functions here will not have access to
+                to the arguments keyword. Replacing the arrow function
+                with a regular function will give you access to the arguments
+                see example function orderMoreChildren
+            */
+            const children = Array.from(arguments);
+            return children.map((child, i) => {
+                return `${child} was child #${i + 1}`;
+            });
+            console.log(arguments)
+        };
+        console.log(orderChildren('matt', 'vicky', 'mike'));
+
+    </script>
 </body>
+
 </html>
