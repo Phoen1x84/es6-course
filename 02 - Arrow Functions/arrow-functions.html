@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <script>
+        /*
+            arrow function benefits
+            1. concise to write, easier
+            2. implicit returns, allows you to write one liners
+            3. it doesn't rebind the value of this when you use an 
+                arrow function inside anothr function
+        */
+        const names = ['matt', 'mark', 'john'];
+        // es5 example
+        const fullNames = names.map(function (name) {
+            return `${name} bos`;
+        });
+        console.log(fullNames);
+        
+        // example with ()
+        const fullNames1 = names.map((name) => {
+            return `${name} bos`;
+        });
+
+        console.log(fullNames1);
+        
+        // example without ()
+        const fullNames2 = names.map(name => {
+            return `${name} bos`;
+        });
+
+        console.log(fullNames2);
+
+        // example one liner
+        const fullNames3 = names.map((name) => `${name} bos`);
+
+        console.log(fullNames3);
+
+        /* 
+            IMPORTANT
+            arrow functions are always anonymous functions
+            
+            named function example
+            function myFunction() {...}
+            this naming method will provide a stacktrace,
+            making easier to debug
+
+            anonymous function example 
+            const myFunction = () => {...}
+            this naming method does not give you a stacktrace
+            making it harder to debug            
+        */
+    </script>
 </body>
+
 </html>
